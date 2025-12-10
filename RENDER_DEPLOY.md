@@ -38,16 +38,23 @@
 In the "Environment" section, add:
 
 ```
-JDBC_DATABASE_URL = jdbc:[paste Internal Database URL from step 1]
+JDBC_DATABASE_URL = jdbc:postgresql://[user]:[password]@[internal-host]:5432/[database]
 JWT_SECRET = your-super-secret-jwt-key-min-32-chars-change-this
 CORS_ORIGINS = https://your-vercel-app.vercel.app
 PORT = 8080
 ```
 
-**Important**: 
-- Use the **Internal Database URL** (not External) for better performance and free egress
-- Add `jdbc:` prefix to the DATABASE_URL when setting JDBC_DATABASE_URL
-- Example: If DATABASE_URL is `postgresql://user:pass@host/db`, use `jdbc:postgresql://user:pass@host/db`
+**Important Steps for JDBC_DATABASE_URL**: 
+1. Go to your PostgreSQL database in Render
+2. Copy the **Internal Database URL** (NOT External)
+3. The Internal URL format: `postgresql://user:pass@dpg-xxxxx-a/dbname`
+4. Add `jdbc:` prefix and `:5432` port: `jdbc:postgresql://user:pass@dpg-xxxxx-a:5432/dbname`
+
+**Example:**
+- Internal URL: `postgresql://chatapp_user:abc123@dpg-xxxxx-a/chatapp_db`
+- JDBC_DATABASE_URL: `jdbc:postgresql://chatapp_user:abc123@dpg-xxxxx-a:5432/chatapp_db`
+
+**Critical:** Ensure your backend service and PostgreSQL database are in the **same region**!
 
 ### 4. Deploy
 
@@ -136,9 +143,12 @@ Render will detect the push and auto-deploy.
 - Ensure `pom.xml` has correct dependencies
 
 ### Database Connection Error
-- Verify `DATABASE_URL` uses **Internal Database URL**
-- Check database is running in Render dashboard
-- Ensure database and service are in same region
+- Verify `JDBC_DATABASE_URL` uses **Internal Database URL** (not External)
+- Check format: `jdbc:postgresql://user:pass@dpg-xxxxx-a:5432/dbname`
+- Ensure `:5432` port is included in the URL
+- **CRITICAL**: Database and backend service MUST be in the **same region**
+- Check database status is "Available" in Render dashboard
+- If different regions, delete and recreate database in same region as backend
 
 ### CORS Errors
 - Update `CORS_ORIGINS` with exact Vercel URL (no trailing slash)
