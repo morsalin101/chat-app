@@ -8,10 +8,8 @@ services:
     healthCheckPath: /actuator/health
     plan: free
     envVars:
-      - key: DATABASE_URL
-        fromDatabase:
-          name: chatapp-postgres
-          property: connectionString
+      - key: JDBC_DATABASE_URL
+        sync: false
       - key: JWT_SECRET
         generateValue: true
       - key: CORS_ORIGINS

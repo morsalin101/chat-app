@@ -19,6 +19,7 @@
 4. Click "Create Database"
 5. **Save the Internal Database URL** (starts with `postgresql://`)
 
+
 ### 2. Create Web Service
 
 1. Click "New +" → "Web Service"
@@ -37,15 +38,20 @@
 In the "Environment" section, add:
 
 ```
-DATABASE_URL = [Use Internal Database URL from step 1]
+JDBC_DATABASE_URL = jdbc:[paste Internal Database URL from step 1]
 JWT_SECRET = your-super-secret-jwt-key-min-32-chars-change-this
 CORS_ORIGINS = https://your-vercel-app.vercel.app
 PORT = 8080
 ```
 
-**Important**: Use the **Internal Database URL** (not External) for better performance and free egress.
+**Important**: 
+- Use the **Internal Database URL** (not External) for better performance and free egress
+- Add `jdbc:` prefix to the DATABASE_URL when setting JDBC_DATABASE_URL
+- Example: If DATABASE_URL is `postgresql://user:pass@host/db`, use `jdbc:postgresql://user:pass@host/db`
 
 ### 4. Deploy
+
+
 
 1. Click "Create Web Service"
 2. Render will:
@@ -71,7 +77,7 @@ After deployment completes:
 
 | Variable | Description | Example |
 |----------|-------------|---------|
-| DATABASE_URL | PostgreSQL connection string | `postgresql://user:pass@host:5432/db` |
+| JDBC_DATABASE_URL | JDBC PostgreSQL connection string (with jdbc: prefix) | `jdbc:postgresql://user:pass@host/db` |
 | JWT_SECRET | Secret key for JWT tokens (min 32 chars) | `your-super-secret-key-change-this` |
 | CORS_ORIGINS | Allowed frontend domains | `https://your-app.vercel.app` |
 | PORT | Application port | `8080` |
