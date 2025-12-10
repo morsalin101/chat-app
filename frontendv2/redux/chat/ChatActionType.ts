@@ -1,0 +1,6 @@
+export const CREATE_NEW_GROUP = 'CREATE_NEW_GROUP';
+export const GET_ALL_CHATS = 'GET_ALL_CHATS';
+export const CREATE_SINGLE_CHAT = 'CREATE_SINGLE_CHAT';
+export const DELETE_CHAT = 'DELETE_CHAT';
+export const EDIT_GROUP_CHAT = 'EDIT_GROUP_CHAT';
+export const MARK_CHAT_AS_READ = 'MARK_CHAT_AS_READ';

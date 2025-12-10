@@ -1,0 +1,15 @@
+# Railway Deployment Configuration
+
+services:
+  - name: chatapp-backend
+    type: web
+    env: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    healthCheckPath: /actuator/health
+    numInstances: 1
+    
+databases:
+  - name: chatapp-postgres
+    type: postgresql
+    plan: free

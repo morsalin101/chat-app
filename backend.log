@@ -1,0 +1,47 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.3)
+
+2025-12-09T01:05:20.184+06:00  INFO 184106 --- [chatapp-backend] [           main] com.nicolas.chatapp.ChatappApplication   : Starting ChatappApplication v0.0.1-SNAPSHOT using Java 17.0.17 with PID 184106 (/media/morsalin/NewVolume/project/chat-app-main/backend/target/chatapp-0.0.1-SNAPSHOT.jar started by morsalin in /media/morsalin/NewVolume/project/chat-app-main)
+2025-12-09T01:05:20.190+06:00  INFO 184106 --- [chatapp-backend] [           main] com.nicolas.chatapp.ChatappApplication   : No active profile set, falling back to 1 default profile: "default"
+2025-12-09T01:05:21.755+06:00  INFO 184106 --- [chatapp-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-09T01:05:21.888+06:00  INFO 184106 --- [chatapp-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 109 ms. Found 5 JPA repository interfaces.
+2025-12-09T01:05:22.833+06:00  INFO 184106 --- [chatapp-backend] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-12-09T01:05:22.853+06:00  INFO 184106 --- [chatapp-backend] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-12-09T01:05:22.854+06:00  INFO 184106 --- [chatapp-backend] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2025-12-09T01:05:22.929+06:00  INFO 184106 --- [chatapp-backend] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-12-09T01:05:22.931+06:00  INFO 184106 --- [chatapp-backend] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2575 ms
+2025-12-09T01:05:23.632+06:00  INFO 184106 --- [chatapp-backend] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-09T01:05:23.771+06:00  INFO 184106 --- [chatapp-backend] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2025-12-09T01:05:23.842+06:00  INFO 184106 --- [chatapp-backend] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-12-09T01:05:24.218+06:00  INFO 184106 --- [chatapp-backend] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-09T01:05:24.275+06:00  INFO 184106 --- [chatapp-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-12-09T01:05:24.810+06:00  INFO 184106 --- [chatapp-backend] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5d6b42cf
+2025-12-09T01:05:24.812+06:00  INFO 184106 --- [chatapp-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-12-09T01:05:24.876+06:00  WARN 184106 --- [chatapp-backend] [           main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-09T01:05:26.364+06:00  INFO 184106 --- [chatapp-backend] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-09T01:05:26.538+06:00  INFO 184106 --- [chatapp-backend] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-09T01:05:27.097+06:00  INFO 184106 --- [chatapp-backend] [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-12-09T01:05:28.538+06:00  INFO 184106 --- [chatapp-backend] [           main] c.n.chatapp.service.FileStorageService   : File storage initialized successfully at: /media/morsalin/NewVolume/project/chat-app-main/uploads
+2025-12-09T01:05:28.669+06:00  WARN 184106 --- [chatapp-backend] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-09T01:05:29.149+06:00  INFO 184106 --- [chatapp-backend] [           main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6a8b94b2, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@69a61267, org.springframework.security.web.context.SecurityContextHolderFilter@265ef3d0, org.springframework.security.web.header.HeaderWriterFilter@7306f65f, org.springframework.web.filter.CorsFilter@795ef208, org.springframework.security.web.authentication.logout.LogoutFilter@3269ae62, com.nicolas.chatapp.config.JwtAuthorizationFilter@79d3473e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@33212ae6, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7170da18, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@673d73da, org.springframework.security.web.session.SessionManagementFilter@1dc9aba0, org.springframework.security.web.access.ExceptionTranslationFilter@2c7fb24c, org.springframework.security.web.access.intercept.AuthorizationFilter@1ac32da1]
+2025-12-09T01:05:29.591+06:00  INFO 184106 --- [chatapp-backend] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2025-12-09T01:05:29.595+06:00  INFO 184106 --- [chatapp-backend] [           main] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2025-12-09T01:05:29.598+06:00  INFO 184106 --- [chatapp-backend] [           main] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@d332ebc]]
+2025-12-09T01:05:29.598+06:00  INFO 184106 --- [chatapp-backend] [           main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2025-12-09T01:05:29.621+06:00  INFO 184106 --- [chatapp-backend] [           main] com.nicolas.chatapp.ChatappApplication   : Started ChatappApplication in 10.322 seconds (process running for 11.059)
+2025-12-09T01:05:29.726+06:00  INFO 184106 --- [chatapp-backend] [MessageBroker-1] com.nicolas.chatapp.service.OtpService   : Cleaned up expired OTPs
+2025-12-09T01:06:02.942+06:00  INFO 184106 --- [chatapp-backend] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-09T01:06:02.943+06:00  INFO 184106 --- [chatapp-backend] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-12-09T01:06:02.947+06:00  INFO 184106 --- [chatapp-backend] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2025-12-09T01:06:03.416+06:00  INFO 184106 --- [chatapp-backend] [nio-8080-exec-1] c.n.chatapp.controllers.ChatController   : Chat 0587971b-33fe-4aef-b395-c79cce7d904e marked as read for user: morsalin@gmail.com
+2025-12-09T01:06:05.710+06:00  INFO 184106 --- [chatapp-backend] [nio-8080-exec-4] c.n.c.controllers.MessageController      : User morsalin@gmail.com sent message: 28509681-f975-47e3-9a7d-456b96413527
+2025-12-09T01:06:07.741+06:00  INFO 184106 --- [chatapp-backend] [nio-8080-exec-7] c.n.chatapp.controllers.ChatController   : Chat 0587971b-33fe-4aef-b395-c79cce7d904e marked as read for user: test@gmail.com
+2025-12-09T01:06:12.687+06:00  INFO 184106 --- [chatapp-backend] [nio-8080-exec-9] c.n.c.controllers.MessageController      : User test@gmail.com sent message: e1f471f2-7bef-4a10-a8e2-b9bbc3586be6
+2025-12-09T01:06:16.699+06:00  INFO 184106 --- [chatapp-backend] [nio-8080-exec-3] c.n.c.controllers.MessageController      : User morsalin@gmail.com sent message: 98e4dc8a-791c-48fb-9ed2-92a8f3a55bec
+2025-12-09T01:06:29.582+06:00  INFO 184106 --- [chatapp-backend] [MessageBroker-2] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 3, active threads = 1, queued tasks = 1, completed tasks = 1]

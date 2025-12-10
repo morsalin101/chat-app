@@ -1,0 +1,36 @@
+# Backend
+backend/target/
+backend/.mvn/
+backend/mvnw
+backend/mvnw.cmd
+backend/*.iml
+backend/.idea/
+backend/.settings/
+backend/.classpath
+backend/.project
+backend/uploads/
+backend/*.log
+
+# Frontend
+frontendv2/node_modules/
+frontendv2/dist/
+frontendv2/.vite/
+frontendv2/.vercel/
+frontendv2/.env.local
+frontendv2/.DS_Store
+
+# Environment files (production URLs should be in Vercel/Railway dashboard)
+.env
+.env.local
+.env.production.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.swp
+*.swo

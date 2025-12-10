@@ -1,0 +1,9 @@
+export const INITIATE_CALL = 'INITIATE_CALL';
+export const RECEIVE_CALL = 'RECEIVE_CALL';
+export const ACCEPT_CALL = 'ACCEPT_CALL';
+export const REJECT_CALL = 'REJECT_CALL';
+export const END_CALL = 'END_CALL';
+export const UPDATE_CALL_STATUS = 'UPDATE_CALL_STATUS';
+export const SET_LOCAL_STREAM = 'SET_LOCAL_STREAM';
+export const SET_REMOTE_STREAM = 'SET_REMOTE_STREAM';
+
