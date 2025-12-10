@@ -1,41 +1,54 @@
-# Complete Deployment Guide - Railway + Vercel
+# Complete Deployment Guide - Render + Vercel
 
 ## 🚀 Quick Deployment Steps
 
-### Step 1: Deploy Backend to Railway
+### Step 1: Deploy Backend to Render
 
 1. **Push to GitHub**
    ```bash
    cd /media/morsalin/NewVolume/project/chat-app-main
    git add .
-   git commit -m "Configure for Railway deployment"
+   git commit -m "Configure for Render deployment"
    git push origin main
    ```
 
-2. **Create Railway Project**
-   - Go to https://railway.app
-   - Click "New Project"
-   - Select "Deploy from GitHub repo"
-   - Choose your repository
-   - Railway will auto-detect the Dockerfile
+2. **Create PostgreSQL Database**
+   - Go to https://dashboard.render.com
+   - Click "New +" → "PostgreSQL"
+   - Configure:
+     - Name: `chatapp-postgres`
+     - Database: `chatapp`
+     - Region: Choose nearest
+     - Plan: **Free**
+   - Click "Create Database"
+   - **Copy the Internal Database URL** (starts with `postgresql://`)
 
-3. **Add PostgreSQL Database**
-   - In your project, click "+ New"
-   - Select "Database" → "Add PostgreSQL"
-   - Railway automatically creates `DATABASE_URL` environment variable
+3. **Create Web Service**
+   - Click "New +" → "Web Service"
+   - Connect GitHub repository: `morsalin101/chat-app`
+   - Configure:
+     - Name: `chatapp-backend`
+     - Region: Same as database
+     - Branch: `main`
+     - Root Directory: `backend`
+     - Environment: **Docker**
+     - Dockerfile Path: `./Dockerfile`
+     - Plan: **Free**
 
 4. **Configure Environment Variables**
    
-   Click on backend service → "Variables":
+   In "Environment" section, add:
    ```
+   DATABASE_URL=[Paste Internal Database URL from step 2]
    JWT_SECRET=my-super-secret-jwt-key-please-change-this-to-something-random-and-secure
    CORS_ORIGINS=http://localhost:5173
    PORT=8080
    ```
 
-5. **Generate Public URL**
-   - Settings → "Generate Domain"
-   - Copy URL (e.g., `chatapp-backend-production.up.railway.app`)
+5. **Deploy**
+   - Click "Create Web Service"
+   - Wait for build to complete (5-10 minutes)
+   - Copy URL (e.g., `https://chatapp-backend.onrender.com`)
 
 ### Step 2: Deploy Frontend to Vercel
 
@@ -43,8 +56,8 @@
    
    Edit `frontendv2/.env.production`:
    ```
-   VITE_API_URL=https://chatapp-backend-production.up.railway.app
-   VITE_WS_URL=https://chatapp-backend-production.up.railway.app
+   VITE_API_URL=https://chatapp-backend.onrender.com/api
+   VITE_WS_URL=wss://chatapp-backend.onrender.com/ws
    ```
 
 2. **Push Changes**
@@ -68,8 +81,8 @@
    
    Settings → Environment Variables:
    ```
-   VITE_API_URL = https://chatapp-backend-production.up.railway.app
-   VITE_WS_URL = https://chatapp-backend-production.up.railway.app
+   VITE_API_URL = https://chatapp-backend.onrender.com/api
+   VITE_WS_URL = wss://chatapp-backend.onrender.com/ws
    ```
 
 5. **Deploy**
@@ -78,21 +91,21 @@
 
 ### Step 3: Update CORS
 
-1. **Update Railway Environment Variable**
+1. **Update Render Environment Variable**
    
-   Railway → Backend Service → Variables:
+   Render Dashboard → chatapp-backend → Environment:
    ```
    CORS_ORIGINS=https://your-app.vercel.app
    ```
 
-2. **Redeploy**
-   - Railway will auto-redeploy with new CORS settings
+2. **Save**
+   - Render will auto-redeploy with new CORS settings
 
 ---
 
 ## 🔄 Auto-Deploy Setup
 
-### Railway (Backend)
+### Render (Backend)
 Automatically deploys on every push to `main` branch.
 
 ### Vercel (Frontend)
@@ -111,15 +124,15 @@ Both services will deploy automatically!
 
 ## 📋 Environment Variables Checklist
 
-### Railway (Backend)
-- [x] `DATABASE_URL` - Auto-created by PostgreSQL add-on
+### Render (Backend)
+- [ ] `DATABASE_URL` - Internal PostgreSQL URL from database
 - [ ] `JWT_SECRET` - Your secret key (min 32 chars)
 - [ ] `CORS_ORIGINS` - Your Vercel URL
 - [ ] `PORT` - 8080
 
 ### Vercel (Frontend)
-- [ ] `VITE_API_URL` - Your Railway backend URL
-- [ ] `VITE_WS_URL` - Your Railway backend URL
+- [ ] `VITE_API_URL` - Your Render backend URL + `/api`
+- [ ] `VITE_WS_URL` - Your Render backend URL (wss://) + `/ws`
 
 ---
 
@@ -127,7 +140,7 @@ Both services will deploy automatically!
 
 1. **Backend Health Check**
    ```
-   https://your-railway-app.up.railway.app/actuator/health
+   https://your-render-app.onrender.com/actuator/health
    ```
 
 2. **Frontend**
@@ -149,40 +162,69 @@ Both services will deploy automatically!
 ## 🐛 Troubleshooting
 
 ### Backend won't start
-- Check Railway logs: Dashboard → Service → Logs
-- Verify DATABASE_URL is set
+- Check Render logs: Dashboard → Service → Logs
+- Verify DATABASE_URL is set correctly (Internal URL)
 - Ensure PORT is 8080
+- Check build logs for errors
+
+### Backend is slow (cold starts)
+- Free tier sleeps after 15 minutes of inactivity
+- First request takes 30-60 seconds to wake up
+- Consider upgrading to paid plan ($7/month) for always-on
 
 ### Frontend can't connect to backend
 - Check CORS_ORIGINS includes your Vercel URL
-- Verify VITE_API_URL is correct
-- Check Railway service is running
+- Verify VITE_API_URL is correct with `/api` suffix
+- Verify VITE_WS_URL uses `wss://` protocol
+- Check Render service is running (not sleeping)
 
 ### Database connection error
-- Verify PostgreSQL is running in Railway
-- Check DATABASE_URL format
-- Ensure database is in same Railway project
+- Verify PostgreSQL is running in Render
+- Use **Internal Database URL** (not External)
+- Check DATABASE_URL format: `postgresql://user:pass@host:port/db`
+- Ensure database and service are in same region
 
 ### CORS errors
 - Update CORS_ORIGINS: `https://your-app.vercel.app`
 - No trailing slash
 - Use https (not http) for production
+- Save and wait for auto-redeploy
+
+### File uploads not working
+- Note: Render free tier has ephemeral filesystem
+- Files are deleted on redeploy
+- Consider using S3/Cloudinary for production
 
 ---
 
 ## 💰 Free Tier Limits
 
-### Railway
-- $5 monthly credit (enough for hobby projects)
-- 500MB PostgreSQL storage
-- 512MB RAM
-- 1GB disk
+### Render
+- **Web Service**: 750 hours/month (sleeps after 15 min idle)
+- **PostgreSQL**: 90-day expiration on free tier
+- **RAM**: 512MB
+- **Build Minutes**: 500/month
+- **Bandwidth**: 100GB/month
 
 ### Vercel
-- 100GB bandwidth/month
-- Unlimited deployments
-- Free custom domains
-- Serverless functions
+- **Bandwidth**: 100GB/month
+- **Deployments**: Unlimited
+- **Domains**: Free custom domains
+- **Serverless Functions**: 100GB-hours execution time
+
+---
+
+## ⚡ Staying Active (Optional)
+
+To prevent Render free tier from sleeping:
+
+1. **UptimeRobot** (recommended):
+   - Sign up at uptimerobot.com
+   - Add HTTP monitor
+   - URL: `https://your-app.onrender.com/actuator/health`
+   - Interval: Every 5 minutes
+   
+2. **Upgrade to Paid**: $7/month for always-on service
 
 ---
 
@@ -190,9 +232,9 @@ Both services will deploy automatically!
 
 After deployment, fill in:
 
-**Backend (Railway):**
+**Backend (Render):**
 ```
-https://______________________.up.railway.app
+https://______________________.onrender.com
 ```
 
 **Frontend (Vercel):**
